@@ -1,5 +1,6 @@
-package fitnesse.responders;
+package fitnesse.responders.editing;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import fitnesse.http.ResponseSender;
 import fitnesse.http.SimpleResponse;
 import fitnesse.responders.run.MultipleTestsRunner;
 import fitnesse.responders.run.SuiteContentsFinder;
+import fitnesse.wikitext.parser.Table;
 import fitnesse.wiki.PageCrawler;
 import fitnesse.wiki.PageCrawlerImpl;
 import fitnesse.wiki.PageData;
@@ -23,8 +25,10 @@ import fitnesse.wiki.WikiPage;
 import fitnesse.wiki.WikiPagePath;
 import fitnesse.wikitext.parser.Parser;
 import fitnesse.wikitext.parser.Symbol;
+import fitnesse.wikitext.parser.SymbolTreeWalker;
+import fitnesse.wikitext.parser.SymbolType;
 
-public class SuggestionResponder implements SecureResponder {
+public class SuggestionsResponder implements SecureResponder {
   public WikiPage page;
   protected WikiPagePath path;
   protected FitNesseContext context;
@@ -40,16 +44,28 @@ public class SuggestionResponder implements SecureResponder {
     Symbol syntaxTree = combineAllPageData();
     
     // Debug:
-    String html = page.getData().translateToHtml(syntaxTree);
+//    String html = page.getData().translateToHtml(syntaxTree);
+//    response.setContent(html);
 
-    response.setContent(html);
+    // Find scenario tables
+    List<Symbol> scenarioTables = findScenarioTables(syntaxTree);
+    System.out.println("Found " + scenarioTables.size() + " tables");
+    StringBuilder b = new StringBuilder(2048);
+    for (Symbol t: scenarioTables) {
+      b.append("\n\nNew Table:\n\n");
+      b.append(t.dump());
+    }
+    response.setContent(b.toString());
+
+    // Filter scenario signatures
+    // Create JSON array and return that as response
+
     return response;
   }
 
   protected Symbol combineAllPageData() throws Exception {
-    List<WikiPage> test2run = new SuiteContentsFinder(page, null, context.root).makePageListForSingleTest();
-
     PageData pageData = page.getData();
+
     SetupTeardownAndLibraryIncluder.includeSetupsTeardownsAndLibrariesBelowTheSuite(pageData, page);
     
     Symbol syntaxTree = pageData.getSyntaxTree();
@@ -57,6 +73,30 @@ public class SuggestionResponder implements SecureResponder {
     syntaxTree.addToFront(preparsedScenarioLibrary);
 
     return syntaxTree;
+  }
+
+  private List<Symbol> findScenarioTables(final Symbol syntaxTree) {
+    final List<Symbol> tables = new ArrayList<Symbol>();
+    SymbolTreeWalker treeWalker = new SymbolTreeWalker() {
+      
+      @Override
+      public boolean visitChildren(Symbol node) {
+        System.out.println("Symbol type = " + node.getType().getClass() + " " + (node.getType() instanceof Table));
+        if (node.getType() instanceof Table) {
+          tables.add(node);
+          return false;
+        }
+        return true;
+      }
+      
+      @Override
+      public boolean visit(Symbol node) {
+        return true;
+      }
+    };
+    
+    syntaxTree.walkPostOrder(treeWalker);
+    return tables;
   }
 
   private WikiPage getRequestedPage(Request request) throws Exception {

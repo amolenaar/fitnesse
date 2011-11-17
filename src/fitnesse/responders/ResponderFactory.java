@@ -14,6 +14,7 @@ import fitnesse.responders.editing.EditResponder;
 import fitnesse.responders.editing.PropertiesResponder;
 import fitnesse.responders.editing.SavePropertiesResponder;
 import fitnesse.responders.editing.SaveResponder;
+import fitnesse.responders.editing.SuggestionsResponder;
 import fitnesse.responders.editing.SymbolicLinkResponder;
 import fitnesse.responders.files.CreateDirectoryResponder;
 import fitnesse.responders.files.DeleteConfirmationResponder;
@@ -94,7 +95,7 @@ public class ResponderFactory {
     addResponder("compareHistory", HistoryComparerResponder.class);
     addResponder("replace", SearchReplaceResponder.class);
     addResponder("overview", SuiteOverviewResponder.class);
-    addResponder("suggestion", SuggestionResponder.class);
+    addResponder("suggestions", SuggestionsResponder.class);
   }
 
   public void addResponder(String key, String responderClassName) throws ClassNotFoundException {

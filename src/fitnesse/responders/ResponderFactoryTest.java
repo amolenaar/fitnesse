@@ -327,8 +327,8 @@ public class ResponderFactoryTest {
   }
   
   @Test
-  public void testSuggestionResponder() throws Exception {
-    assertResponderTypeMatchesInput("suggestion", SuggestionResponder.class);
+  public void testSuggestionsResponder() throws Exception {
+    assertResponderTypeMatchesInput("suggestions", SuggestionsResponder.class);
   }
 
 }
