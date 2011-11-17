@@ -325,4 +325,10 @@ public class ResponderFactoryTest {
   public void testHistoryComparerResponder() throws Exception {
     assertResponderTypeMatchesInput("compareHistory", HistoryComparerResponder.class);
   }
+  
+  @Test
+  public void testSuggestionResponder() throws Exception {
+    assertResponderTypeMatchesInput("suggestion", SuggestionResponder.class);
+  }
+
 }

@@ -94,6 +94,7 @@ public class ResponderFactory {
     addResponder("compareHistory", HistoryComparerResponder.class);
     addResponder("replace", SearchReplaceResponder.class);
     addResponder("overview", SuiteOverviewResponder.class);
+    addResponder("suggestion", SuggestionResponder.class);
   }
 
   public void addResponder(String key, String responderClassName) throws ClassNotFoundException {
