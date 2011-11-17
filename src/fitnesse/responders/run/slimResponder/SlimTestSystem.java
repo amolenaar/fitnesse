@@ -268,9 +268,9 @@ public abstract class SlimTestSystem extends TestSystem implements SlimTestConte
     allTables = createSlimTables(tableScanner);
     testResults = pageData;
 
-    boolean runAllTablesAtOnce = false;
     String htmlResults = "";
-    if (runAllTablesAtOnce || (allTables.size() == 0)) {
+    if (allTables.size() == 0) {
+      // ensure some meaningful output
       htmlResults = processTablesAndGetHtml(allTables, START_OF_TEST, END_OF_TEST);
     } else {
       List<SlimTable> oneTableList = new ArrayList<SlimTable>(1);
