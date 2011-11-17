@@ -112,5 +112,32 @@ public class Symbol {
                 : SymbolType.Empty;
     }
 
-
+    public String dump() {
+      final StringBuilder b = new StringBuilder();
+      
+      final SymbolTreeWalker walker = new SymbolTreeWalker() {
+        
+        @Override
+        public boolean visitChildren(Symbol node) {
+          return false;
+        }
+        
+        @Override
+        public boolean visit(Symbol node) {
+          b.append("[");
+          b.append(node.getType());
+          b.append("'");
+          b.append(node.getContent());
+          b.append("' ");
+          for (Symbol child: node.getChildren()) {
+            if (!child.walkPreOrder(this)) break;
+          }
+          b.append("] ");
+          return true;
+        }
+      };
+      
+      walkPreOrder(walker);
+      return b.toString();
+    }
 }
