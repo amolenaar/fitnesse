@@ -284,6 +284,7 @@ Wysiwyg.prototype.createWysiwygToolbar = function (d) {
         '<li title="Insert row below"><a id="wt-insert-row-after" href="#"></a></li>',
         '<li title="Insert column before"><a id="wt-insert-col-before" href="#"></a></li>',
         '<li title="Insert column after"><a id="wt-insert-col-after" href="#"></a></li>',
+        '<li title="Split table after"><a id="wt-split-table-after" href="#"></a></li>',
         '<li title="Delete cell (Ctrl-|)"><a id="wt-delete-cell" href="#"></a></li>',
         '<li title="Delete row"><a id="wt-delete-row" href="#"></a></li>',
         '<li title="Delete column"><a id="wt-delete-col" href="#"></a></li>',
@@ -391,6 +392,8 @@ Wysiwyg.prototype.setupWysiwygMenuEvents = function () {
 			return [ self.insertTableColumn, false ];
 		case "insert-col-after":
 			return [ self.insertTableColumn, true ];
+        case "split-table-after":
+            return [ self.splitTable, true ];
 		case "delete-cell":
 			return [ self.deleteTableCell ];
 		case "delete-row":
@@ -1183,6 +1186,25 @@ Wysiwyg.prototype.insertTableColumn = function (after) {
         for (i = 0; i < length; i++) {
             var row = rows[i];
             this.insertTableCell(row, Math.min(cellIndex, row.cells.length));
+        }
+    }
+};
+
+Wysiwyg.prototype.splitTable = function (after) {
+    var focus = this._getFocusForTable();
+    if (focus.table && focus.row) {
+        var d = this.contentDocument;
+        var tBody = focus.table.tBodies[0];
+        var newTable = d.createElement('table');
+        $(focus.table).after(newTable);
+        var newTBody = d.createElement('tbody');
+        newTable.appendChild(newTBody);
+        
+        var rowIndex = focus.row.rowIndex + (after ? 1 : 0);
+        while (focus.table.rows.length > rowIndex) {
+            var row = focus.table.rows[rowIndex];
+            tBody.removeChild(row);
+            newTBody.appendChild(row);
         }
     }
 };
