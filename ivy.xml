@@ -30,5 +30,6 @@
 		<!-- scope: test -->
 		<dependency org="org.mockito" name="mockito-all" rev="1.7" conf="test->default" />
 		<dependency org="junit" name="junit" rev="4.10" conf="test->default" />
+		<dependency org="emma" name="emma" rev="2.1.5320" conf="*->default" />
 	</dependencies>
 </ivy-module>
