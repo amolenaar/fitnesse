@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<properties>
+	<Edit>true</Edit>
+	<Files>true</Files>
+	<Help>The same acceptance tests, now with code coverage</Help>
+	<Properties>true</Properties>
+	<RecentChanges>true</RecentChanges>
+	<Refactor>true</Refactor>
+	<Search>true</Search>
+	<Suite>true</Suite>
+	<SymbolicLinks>
+		<SuiteAcceptanceTests>.FitNesse.SuiteAcceptanceTests</SuiteAcceptanceTests>
+	</SymbolicLinks>
+	<Versions>true</Versions>
+	<WhereUsed>true</WhereUsed>
+</properties>

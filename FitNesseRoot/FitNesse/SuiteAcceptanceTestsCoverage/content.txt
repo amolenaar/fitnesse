@@ -1,0 +1,5 @@
+!contents
+
+
+
+!define COMMAND_PATTERN (java -cp %p emmarun -r html -sp src -cp classes %m)
