@@ -1,0 +1,3 @@
+#set( $TYPE_WIKIWORD = 'type="text" pattern="^[A-Z](?:[a-z0-9]+[A-Z][a-z0-9]*)+$" required title="The page name should be a valid &quot;WikiWord&quot;"' )
+#set( $TYPE_WIKIPATH = 'type="text" pattern="^(?:[<>^.])?(?:[A-Z](?:[a-z0-9]+[A-Z][a-z0-9]*)+[.]?)+$" required title="The page path should be a valid &quot;WikiPath.WikiWord&quot;" ' )
+#set( $TYPE_WIKIPATH_OR_FILE = 'type="text" pattern="^(?:[<>^.])?(?:[A-Z](?:[a-z0-9]+[A-Z][a-z0-9]*)+[.]?)+$|file://.*" required title="The page path should be a valid &quot;WikiPath.WikiWord&quot; or a &quot;file://some/file&quot;" ' )

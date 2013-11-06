@@ -212,8 +212,8 @@ public class PropertiesResponderTest {
 
     assertSubString("Symbolic Links", content);
     assertSubString("<input type=\"hidden\" name=\"responder\" value=\"symlink\"", content);
-    assertSubString("<input type=\"text\" name=\"linkName\"", content);
-    assertSubString("<input type=\"text\" name=\"linkPath\"", content);
+    assertHasRegexp("<input type=\"text\" .* name=\"linkName\"", content);
+    assertHasRegexp("<input type=\"text\" .* name=\"linkPath\"", content);
     assertSubString("<input type=\"submit\" name=\"submit\" value=\"Create/Replace\"", content);
   }
 
@@ -235,14 +235,14 @@ public class PropertiesResponderTest {
 
     getPropertiesContentFromPage(page);
 
-    assertSubString("<input type=\"text\" name=\"InternalAbsPage\"", content);
+    assertHasRegexp("<input type=\"text\" .* name=\"InternalAbsPage\"", content);
     assertSubString("<a href=\".PageOne.ChildOne\">.PageOne.ChildOne</a>", content);
     assertMatches("<a href=\".*\">Rename</a>", content);
 
-    assertSubString("<input type=\"text\" name=\"InternalRelPage\"", content);
+    assertHasRegexp("<input type=\"text\" .* name=\"InternalRelPage\"", content);
     assertSubString("<a href=\".PageOne.ChildOne\">PageOne.ChildOne</a>", content);
 
-    assertSubString("<input type=\"text\" name=\"InternalSubPage\"", content);
+    assertHasRegexp("<input type=\"text\" .* name=\"InternalSubPage\"", content);
     assertSubString("<a href=\".SomePage.SomeChild\">&gt;SomeChild</a>", content);
 
     assertHasRegexp("<td>\\W*file://some/page\\W*</td>", content);

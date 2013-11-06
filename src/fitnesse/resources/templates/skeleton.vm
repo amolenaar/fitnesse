@@ -29,6 +29,7 @@
  </head>
  <body#if( $bodyClass ) class="$bodyClass"#end>
 
+ #parse( 'vars.vm' )
   <header>
    #parse( $headerTemplate )
   </header>

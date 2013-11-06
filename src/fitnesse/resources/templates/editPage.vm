@@ -14,7 +14,7 @@
 #if($!isNewPage)
  <input type="hidden" name="responder" value="addChild"/>
  <fieldset>
-  <label for="pagename">Page name:</label><input type="text" id="pagename" name="pageName" value="" class="wikiword" />
+  <label for="pagename">Page name:</label><input $TYPE_WIKIWORD id="pagename" name="pageName" value="" />
  </fieldset>
  #if( $!pageType )
  <input type="hidden" name="pageType" value="$pageType"/>
