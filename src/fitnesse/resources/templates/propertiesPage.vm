@@ -112,10 +112,10 @@
    #end
    <tr>
     <td>
-     <input type="text" name="linkName" size="30"/>
+     <input type="text" name="linkName" size="30" pattern="^[A-Z](?:[a-z0-9]+[A-Z][a-z0-9]*)+$" required title="The page name should be a valid 'WikiWord'" />
     </td>
     <td>
-     <input type="text" name="linkPath" size="70"/>
+     <input type="text" name="linkPath" size="70" pattern="^(?:[<>^.])?(?:[A-Z](?:[a-z0-9]+[A-Z][a-z0-9]*)+[.]?)+$" required title="The page path should be a valid 'WikiPath.WikiWord'" />
     </td>
     <td>
      <input type="submit" name="submit" value="Create/Replace"/>
