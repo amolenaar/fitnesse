@@ -59,7 +59,7 @@
    <h2>Wiki Import</h2>
    <p>Supply the URL for the wiki you'd like to import.</p>
    <label for="remoteUrl">Remote Wiki URL:</label>
-   <input type="text" id="remoteUrl" name="remoteUrl" size="70"/>
+   <input type="url" id="remoteUrl" name="remoteUrl" size="70"/>
   </fieldset>
   
   <fieldset>
