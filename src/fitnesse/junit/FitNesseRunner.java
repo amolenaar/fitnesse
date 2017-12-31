@@ -227,7 +227,6 @@ public class FitNesseRunner extends ParentRunner<WikiPage> {
   }
 
   protected FitNesseContext createContext(Class<?> suiteClass) throws Exception {
-
     return initContextConfigurator().makeFitNesseContext();
   }
 
